@@ -15,4 +15,4 @@
  		?>
 		<script src="/script/modernizr-respond.js"></script>
 	</head>
-	<body>
+	<body class="<?php echo $body ?>">
