@@ -1,0 +1,5 @@
+define('observer', ['jquery'], function ($) {
+
+
+
+});

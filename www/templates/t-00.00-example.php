@@ -6,5 +6,6 @@
 	$description = 'Example template';
 	include($server . '/modules/m-00.00-document-head.php'); 
 ?>
+<?php include($server . '/modules/m-02.00-example-page-header.php'); ?>
 
 <?php include($server . '/modules/m-01.00-document-footer.php'); ?>

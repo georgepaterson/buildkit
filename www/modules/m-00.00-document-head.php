@@ -7,12 +7,13 @@
 		<meta charset="utf-8" />
 		<meta name="description" content="<?php echo $description ?>" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<?php include($server . '/components/c-00.00-global-css.html'); ?>
 		<?php
 			foreach ($styles as $key => $style) {
 				echo '<link rel="stylesheet" href="'.$style.'" type="text/css" />';
 			}
  		?>
-		<script src="/script/modernizr-respond.js"></script>
+		<script src="/script/external/polyfills.js"></script>
 	</head>
-	<body class="<?php echo $body ?>">
+	<body class="<?php foreach ($body as $key => $classname) {echo $classname;} ?>">

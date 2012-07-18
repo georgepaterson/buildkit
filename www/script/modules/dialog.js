@@ -1,0 +1,5 @@
+define('dialog', ['jquery'], function ($) {
+
+
+
+});
