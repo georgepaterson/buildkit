@@ -1,0 +1,5 @@
+define('mediator', ['jquery'], function ($) {
+
+
+
+});

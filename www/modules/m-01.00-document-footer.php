@@ -1,4 +1,3 @@
-		<script src="/script/external/requirejs.js"></script>
-		<script src="/script/example.js"></script>
+		<script data-main="/script/example" src="/script/external/requirejs.js"></script>
 	</body>
 </html>

@@ -6,10 +6,10 @@ require.config({
     }
 });
 require(['jquery'], function($) {
-	if ($('.dialog').length) {
+	if ($('.example-dialog').length) {
 		require(['jquery', 'modules/dialog'], function($) {
 		    $(function() { 
-				$('.dialog').dialog();
+				$('.example-dialog').dialog();
 		    });
 		});
 	}

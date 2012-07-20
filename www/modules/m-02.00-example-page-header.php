@@ -1,5 +1,5 @@
 <header id="site-header" class="site-header" role="banner">
-	<p id="site-skip-link" class="site-skip-link accessible"><a href="#main">Skip to content</a></p>
+	<p id="skip-link" class="skip-link accessible"><a href="#main">Skip to content</a></p>
 	<div id="site-branding" class="site-branding">
 		<h1 class="accessible">Example site heading</h1>
 		<a class="site-logo" href="#"><img src="/images/brand-logo.png" alt="Brand logo description"></a>					
