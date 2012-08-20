@@ -9,6 +9,7 @@ define(['jquery'], function ($) {
 		*/
 		var Dialog = function (element, options) {
 			this.element = $(element);
+			this.content = this.element.html();
 			this.options = options;
 			this.create();
 		}
@@ -24,16 +25,18 @@ define(['jquery'], function ($) {
 					$('body').append($.fn.dialog.template);
 					$.fn.dialog.initialised = true;
 				}
+				$.fn.dialog.template.append(this.content);
 				if (this.options.open) {
 					this.open();
+				} else {
+					$.fn.dialog.template.hide();
 				}
 			},
 			/*
 
 			*/
 			open: function () {
-				var content = this.element.html();
-				$.fn.dialog.template.append(content).show();
+				$.fn.dialog.template.show();
 				this.isOpen = true;
 		    },
 			/*

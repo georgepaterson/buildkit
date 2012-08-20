@@ -7,6 +7,6 @@
 	include($server . '/modules/m-00.00-document-head.php'); 
 ?>
 <?php include($server . '/modules/m-02.00-example-page-header.php'); ?>
-
+<?php include($server . '/modules/m-04.00-example-dialog.php'); ?>
 <?php include($server . '/modules/m-03.00-example-page-footer.php'); ?>
 <?php include($server . '/modules/m-01.00-document-footer.php'); ?>

@@ -9,7 +9,7 @@ require(['jquery'], function($) {
 	if ($('.example-dialog').length) {
 		require(['jquery', 'modules/dialog'], function($) {
 		    $(function() { 
-				$('.example-dialog').dialog();
+				$('.example-dialog').dialog({open: false});
 		    });
 		});
 	}
