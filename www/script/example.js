@@ -6,11 +6,17 @@ require.config({
     }
 });
 require(['jquery'], function($) {
-	if ($('.example-dialog').length) {
+	if ($('.dialog-link').length) {
 		require(['jquery', 'modules/dialog'], function($) {
-		    $(function() { 
-				$('.example-dialog').dialog({open: false});
-		    });
+			$('.dialog-link').on('click', function(event){
+				event.preventDefault();
+				var link = $(this).attr('href');
+				$(link).dialog();
+			    /*$('.dialog-close').on('click', function(event) {
+				  event.preventDefault();
+				  $(link).dialog('close');
+				});*/
+			});
 		});
 	}
 });

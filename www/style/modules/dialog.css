@@ -1,7 +1,14 @@
 .dialog {
-	border: 1px solid #CCC;
-	border-radius: 5px;
-	padding: 5px;
+	background: #FFF;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	border-radius: 6px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+	left: 50%;
+	padding: 6px;
     position: absolute;
+	top: 50%;
     z-index: 1000;
+}
+.dialog-content {
+	display: none;
 }

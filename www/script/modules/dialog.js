@@ -11,6 +11,11 @@ define(['jquery'], function ($) {
 			this.element = $(element);
 			this.content = this.element.html();
 			this.options = options;
+			if ($.fn.dialog.initialised === false) {
+				$('body').append($.fn.dialog.template);
+				$.fn.dialog.template.hide();
+			}
+			$.fn.dialog.initialised = true;
 			this.create();
 		}
 		/*
@@ -21,15 +26,21 @@ define(['jquery'], function ($) {
 
 			*/
 			create: function () {
-				if ($.fn.dialog.initialised === false) {
-					$('body').append($.fn.dialog.template);
-					$.fn.dialog.initialised = true;
+				if ($.fn.dialog.past !== null) {
+					if ($.fn.dialog.past.element !== this.element) {
+						$.fn.dialog.template.empty().append(this.content);
+					}
+				} else {
+					$.fn.dialog.template.append(this.content);
 				}
-				$.fn.dialog.template.append(this.content);
+				$.fn.dialog.past = this;
+				if (this.options.close) {
+					(this.options.close.call(this));
+				}
 				if (this.options.open) {
 					this.open();
 				} else {
-					$.fn.dialog.template.hide();
+					this.close();
 				}
 			},
 			/*
@@ -43,7 +54,7 @@ define(['jquery'], function ($) {
 
 			*/
 			close: function () {
-				$.fn.dialog.template.empty().hide();
+				$.fn.dialog.template.hide();
 				this.isOpen = false;
 		    },
 			/*
@@ -76,18 +87,22 @@ define(['jquery'], function ($) {
 				}
 				if (typeof method == 'string' && data[method]) {
 					data[method]();
+				}
+				if (typeof method == 'object' || !data[method]) {
+					data.create();
 				} 
 			});	
 		};
 		/*
 		
 		*/
+		$.fn.dialog.past = null;
 		$.fn.dialog.initialised = false;
 		$.fn.dialog.template = $('<div class="dialog" role="dialog" aria-hidden="true" aria-labelledby=""></div>');
 		$.fn.dialog.defaults = {
 			modal: false,
-			open: true
+			open: true,
+			close: function() {var that = this; $('.dialog-close').on('click', function(event) {event.preventDefault(); $(that).dialog('close');});}
 		};
 	}(jQuery, document, window));
 });
-
