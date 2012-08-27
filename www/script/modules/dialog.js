@@ -35,7 +35,7 @@ define(['jquery'], function ($) {
 				}
 				$.fn.dialog.past = this;
 				if (this.options.close) {
-					(this.options.close.call(this));
+					this.options.close.call(this);
 				}
 				if (this.options.open) {
 					this.open();
@@ -84,13 +84,12 @@ define(['jquery'], function ($) {
 					options = $.extend(true, {}, $.fn.dialog.defaults, typeof method == 'object' && method);
 				if (!data) {
 					$(this).data('dialog', (data = new Dialog(this, options)));
+				} else if (typeof method == 'object' || !data[method]) {
+					data.create();
 				}
 				if (typeof method == 'string' && data[method]) {
 					data[method]();
 				}
-				if (typeof method == 'object' || !data[method]) {
-					data.create();
-				} 
 			});	
 		};
 		/*
@@ -100,9 +99,9 @@ define(['jquery'], function ($) {
 		$.fn.dialog.initialised = false;
 		$.fn.dialog.template = $('<div class="dialog" role="dialog" aria-hidden="true" aria-labelledby=""></div>');
 		$.fn.dialog.defaults = {
+			close: function() {var that = this; $.fn.dialog.template.find('.dialog-close').on('click', function(event) { event.preventDefault(); $(that).dialog('close'); }); },
 			modal: false,
-			open: true,
-			close: function() {var that = this; $('.dialog-close').on('click', function(event) {event.preventDefault(); $(that).dialog('close');});}
+			open: true
 		};
 	}(jQuery, document, window));
 });
