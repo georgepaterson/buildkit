@@ -1,14 +1,38 @@
+.dialog-content {
+	display: none;
+}
 .dialog {
 	background: #FFF;
 	border: 1px solid rgba(0, 0, 0, 0.4);
 	border-radius: 6px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 	left: 50%;
-	padding: 6px;
+	padding: 3px;
     position: absolute;
 	top: 50%;
     z-index: 1000;
 }
-.dialog-content {
-	display: none;
+.dialog header {
+	background-color: rgb(15, 175, 205);
+	background: -webkit-linear-gradient(top, rgb(0, 150, 205), rgb(15, 75, 205));
+	background:    -moz-linear-gradient(top, rgb(0, 150, 205), rgb(15, 75, 205));
+	background: 	-ms-linear-gradient(top, rgb(0, 150, 205), rgb(15, 75, 205));
+	background: 		linear-gradient(top, rgb(0, 150, 205), rgb(15, 75, 205));
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	border-radius: 6px;
+	display: block;
+	overflow: hidden;
+	padding: 6px;
+	width: 300px;
+}
+.dialog header a {
+	background: transparent url(/images/dialog-close.png) no-repeat top left;
+	display: block;
+	float: right;
+	height: 14px;
+	overflow: hidden;
+	text-decoration: none;
+	text-indent: 100%;
+	width: 14px;
+	white-space: nowrap;
 }

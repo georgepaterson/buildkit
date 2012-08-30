@@ -26,7 +26,7 @@ require(['jquery'], function($) {
 			});
 			$('.dialog-iframe').on('click', function(event){
 				var link = $(this).attr('href'),
-					fragment = $('<div><a class="dialog-close" href="#" role="button">Close dialog</a></div>');
+					fragment = $('<div><header><a class="dialog-close" href="#" role="button">Close dialog</a></header></div>');
 				event.preventDefault();
 				fragment.append('<iframe id="dialog-iframe" frameborder="0" src="' + link + '"></iframe>')
 					.dialog();

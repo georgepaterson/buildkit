@@ -1,6 +1,6 @@
 <p><a class="dialog-link" href="#example-dialog">Example dialog link.</a></p>
 <div id="example-dialog" class="dialog-content">
-	<a class="dialog-close" href="#" role="button">Close dialog</a>
+	<header><a class="dialog-close" href="#" role="button">Close dialog</a></header>
 	<p>Example dialog.</p>
 	<p>With example content.</p>
 </div>
