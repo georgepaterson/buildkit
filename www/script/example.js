@@ -6,7 +6,7 @@ require.config({
     }
 });
 require(['jquery'], function($) {
-	if ($('.dialog-link').length) {
+	if ($('.dialog-link, .dialog-remote, .dialog-iframe, .dialog-fragment').length) {
 		require(['jquery', 'modules/dialog'], function($) {
 			$('.dialog-link').on('click', function(event){
 				var link = $(this).attr('href');
@@ -16,14 +16,20 @@ require(['jquery'], function($) {
 			$('.dialog-remote').on('click', function(event){
 				var link = $(this).attr('href'),
 					hash = link.replace(/.*(?=#[^\s]+$)/, ''),
-					container = $('<div></div>');
+					fragment = $('<div></div>'),
+					progress = $('<div class="dialog-progress">Content loading...</div>');
 				event.preventDefault();
-				container.load(link + ' ' + hash, function() {
+				fragment.append(progress);
+				fragment.load(link + ' ' + hash, function() {
 					$(this).find(hash).dialog();
 				});
 			});
 			$('.dialog-iframe').on('click', function(event){
-
+				var link = $(this).attr('href'),
+					fragment = $('<div><a class="dialog-close" href="#" role="button">Close dialog</a></div>');
+				event.preventDefault();
+				fragment.append('<iframe id="dialog-iframe" frameborder="0" src="' + link + '"></iframe>')
+					.dialog();
 			});
 		});
 	}
