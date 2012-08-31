@@ -37,7 +37,7 @@ define(['jquery'], function ($) {
 				if (this.options.close) {
 					this.options.close.call(this);
 				}
-				if (this.options.open) {
+				if (this.options.auto) {
 					this.open();
 				} else {
 					this.close();
@@ -47,18 +47,32 @@ define(['jquery'], function ($) {
 
 			*/
 			open: function () {
+				var that = this,
+					width = $(document).outerWidth(),
+					height = $(document).outerHeight();
 				if (this.options.position) {
 					this.options.position.call(this);
 				}
-				$.fn.dialog.template.show();
-				this.isOpen = true;
+				if (this.options.modal) {
+					$('body').append($.fn.dialog.overlay);
+					$.fn.dialog.overlay.css({width: width, height: height});
+				}
+				$.fn.dialog.template.show().attr('aria-hidden', false);
+				$(document).on('keyup.dialog', function(event) {
+					if (event.which == 27) {
+						that.close()
+					}
+				});
 		    },
 			/*
 
 			*/
 			close: function () {
-				$.fn.dialog.template.hide();
-				this.isOpen = false;
+				$(document).off('keyup.dialog');
+				if (this.options.modal) {
+					$.fn.dialog.overlay.remove();
+				}
+				$.fn.dialog.template.hide().attr('aria-hidden', true);
 		    },
 			/*
 
@@ -90,7 +104,8 @@ define(['jquery'], function ($) {
 		*/
 		$.fn.dialog.past = null;
 		$.fn.dialog.initialised = false;
-		$.fn.dialog.template = $('<div class="dialog" role="dialog" aria-hidden="true" aria-labelledby=""></div>');
+		$.fn.dialog.template = $('<div class="dialog" role="dialog" aria-hidden="true"></div>');
+		$.fn.dialog.overlay = $('<div class="dialog-overlay"></div>');
 		/*
 		
 		*/
@@ -100,8 +115,8 @@ define(['jquery'], function ($) {
 				$.fn.dialog.template.find('.dialog-close').on('click', function(event) { 
 					event.preventDefault(); $(that).dialog('close'); }); 
 				},
-			modal: false,
-			open: true,
+			modal: true,
+			auto: true,
 			position: function() {
 				var width = ($(document).outerWidth() / 2) - ($.fn.dialog.template.outerWidth() / 2), 
 					height = $(document).scrollTop() + ($(window).height() / 2) - ($.fn.dialog.template.outerHeight() / 2); 
