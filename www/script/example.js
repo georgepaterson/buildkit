@@ -11,7 +11,7 @@ require(['jquery'], function($) {
 			$('.dialog-link').on('click', function(event){
 				var link = $(this).attr('href');
 				event.preventDefault();				
-				$(link).dialog();
+				$(link).dialog({modal: true});
 			});
 			$('.dialog-remote').on('click', function(event){
 				var link = $(this).attr('href'),
