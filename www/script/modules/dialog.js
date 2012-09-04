@@ -14,6 +14,7 @@ define(['jquery'], function ($) {
 		'use strict';
 		/*
 			Dialog constructor.
+			The dialog template is initialised once on the page as a feature of the flyweight design pattern 
 		*/
 		var Dialog = function (element, options) {
 			this.element = $(element);
@@ -28,6 +29,10 @@ define(['jquery'], function ($) {
 		}
 		/*
 			Dialog methods.
+			These methods may be called internally using this.method();
+			or externally using $('.object).dialog('method'); 
+			Only the close and destroy methods are currently useful as external references 
+			as create and open are linked methods called by default with $('.object).dialog();   
 		*/
 		Dialog.prototype = {
 			/*
@@ -115,7 +120,9 @@ define(['jquery'], function ($) {
 			});	
 		};
 		/*
-			Dialog namedspaced propeties to support the flyweight design pattern. 
+			Dialog namedspaced propeties to support the flyweight design pattern.
+			Template and overlay are outline here to allow easy modification 
+			while allowing JavaScript to be bound to the dialog object not the specific document object. 
 		*/
 		$.fn.dialog.past = null;
 		$.fn.dialog.initialised = false;
@@ -123,6 +130,8 @@ define(['jquery'], function ($) {
 		$.fn.dialog.overlay = $('<div class="dialog-overlay"></div>');
 		/*
 			Dialog default options.
+			Options include both variables and function calls. 
+			The function calls may change in a later iteration but are a good example of how they can be used.
 		*/
 		$.fn.dialog.defaults = {
 			auto: true,
