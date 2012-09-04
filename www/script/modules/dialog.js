@@ -5,13 +5,13 @@
 	Dual licensed under the MIT or GPL Version 2 licenses.
 */
 define(['jquery'], function ($) {
+	'use strict';
 	/*	
 		This plugin uses a constructor and prototype before instatiation of the plugin with jQuery. 
 		Built with the flyweight design pattern, only a single dialog is active at any time with content loaded in to the dialog.
 		Definition of jQuery wraps the plugin, can be removed as required.
 	*/
 	(function ($, document, window) {
-		'use strict';
 		/*
 			Dialog constructor.
 			The dialog template is initialised once on the page as a feature of the flyweight design pattern 
@@ -22,11 +22,11 @@ define(['jquery'], function ($) {
 			this.options = options;
 			if ($.fn.dialog.initialised === false) {
 				$('body').append($.fn.dialog.template);
-				$.fn.dialog.template.hide();				
+				$.fn.dialog.template.hide();
 			}
 			$.fn.dialog.initialised = true;
 			this.create();
-		}
+		};
 		/*
 			Dialog methods.
 			These methods may be called internally using this.method();
@@ -72,15 +72,15 @@ define(['jquery'], function ($) {
 				}
 				$.fn.dialog.template.show().attr('aria-hidden', false).focus();
 				if (this.options.modal) {
-			        $(document).on('focusin.dialog', function(event) {
-			          if ($.fn.dialog.template[0] !== event.target && !$.fn.dialog.template.has(event.target).length) {
-						$.fn.dialog.template.focus();
-			          }
+			        $(document).on('focusin.dialog', function (event) {
+						if ($.fn.dialog.template[0] !== event.target && !$.fn.dialog.template.has(event.target).length) {
+							$.fn.dialog.template.focus();
+						}
 			        });
 				}
-				$(document).on('keyup.dialog', function(event) {
-					if (event.which == 27) {
-						that.close()
+				$(document).on('keyup.dialog', function (event) {
+					if (event.which === 27) {
+						that.close();
 					}
 				});
 		    },
@@ -101,23 +101,23 @@ define(['jquery'], function ($) {
 				this.close();
 				this.element.removeData('dialog');
 		    }
-		}
+		};
 		/*
 			Dialog jQuery plugin instantiation.
 		*/
 		$.fn.dialog = function (method) {
 			return this.each(function () {
 				var data = $(this).data('dialog'),
-					options = $.extend(true, {}, $.fn.dialog.defaults, $(this).data('dialog'), typeof method == 'object' && method);
+					options = $.extend(true, {}, $.fn.dialog.defaults, $(this).data('dialog'), typeof method === 'object' && method);
 				if (!data) {
 					$(this).data('dialog', (data = new Dialog(this, options)));
-				} else if (typeof method == 'object' || !data[method]) {
+				} else if (typeof method === 'object' || !data[method]) {
 					data.create();
 				}
-				if (typeof method == 'string' && data[method]) {
+				if (typeof method === 'string' && data[method]) {
 					data[method]();
 				}
-			});	
+			});
 		};
 		/*
 			Dialog namedspaced propeties to support the flyweight design pattern.
@@ -135,15 +135,17 @@ define(['jquery'], function ($) {
 		*/
 		$.fn.dialog.defaults = {
 			auto: true,
-			close: function() {
-				var that = this; 
-				$.fn.dialog.template.find('.dialog-close').on('click', function(event) { 
-					event.preventDefault(); that.close(); }); 
-				},
+			close: function () {
+				var that = this;
+				$.fn.dialog.template.find('.dialog-close').on('click', function (event) {
+					event.preventDefault();
+					that.close();
+				});
+			},
 			modal: false,
-			position: function() {
-				var width = ($(document).outerWidth() / 2) - ($.fn.dialog.template.outerWidth() / 2), 
-					height = $(document).scrollTop() + ($(window).height() / 2) - ($.fn.dialog.template.outerHeight() / 2); 
+			position: function () {
+				var width = ($(document).outerWidth() / 2) - ($.fn.dialog.template.outerWidth() / 2),
+					height = $(document).scrollTop() + ($(window).height() / 2) - ($.fn.dialog.template.outerHeight() / 2);
 				$.fn.dialog.template.css({left: width, top: height});
 			}
 		};
