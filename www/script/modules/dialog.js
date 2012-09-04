@@ -30,9 +30,9 @@ define(['jquery'], function ($) {
 		/*
 			Dialog methods.
 			These methods may be called internally using this.method();
-			or externally using $('.object).dialog('method'); 
+			or externally using $('.object').dialog('method'); 
 			Only the close and destroy methods are currently useful as external references 
-			as create and open are linked methods called by default with $('.object).dialog();   
+			as create and open are linked methods called by default with $('.object').dialog();   
 		*/
 		Dialog.prototype = {
 			/*
