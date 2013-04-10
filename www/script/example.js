@@ -45,8 +45,18 @@ require(['jquery'], function ($) {
 					progress = $('<div class="dialog-progress">Content loading...</div>');
 				event.preventDefault();
 				fragment.append(progress);
-				fragment.load(link + ' ' + hash, function () {
-					$(this).find(hash).dialog();
+				fragment.load(link + ' ' + hash, function (response, status, xhr) {
+                    if (status == 'error') {
+                        $(this).html('<header><a class="dialog-close" href="#" role="button">Close dialog</a></header>'
+                        + '<p>Houston we have a problem: ' + xhr.status + ' ' + xhr.statusText + '</p>').dialog();
+                    } 
+                    if ($(this).find(hash).length) {
+                        $(this).find(hash).dialog();
+                    } else {
+                        $(this).html('<header><a class="dialog-close" href="#" role="button">Close dialog</a></header>'
+                        + '<p>Houston we have a problem: Content not found.</p>').dialog();
+                        
+                    }
 				});
 			});
 			/*
